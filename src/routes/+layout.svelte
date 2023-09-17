@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-	<title>Enterprise</title>
+	<title>CauliQuest</title>
 	<link rel="icon" href="https://fav.farm/🔥" />
 </svelte:head>
 
