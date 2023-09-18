@@ -12,6 +12,16 @@
 
 
 	$: cmsContent = ''
+	let cmsConfig = {
+  "height": 500,
+  "plugins": [
+      "a11ychecker","advlist","advcode","advtable","autolink","checklist","export",
+      "lists","link","image","charmap","preview","anchor","searchreplace","visualblocks",
+      "powerpaste","fullscreen","formatpainter","insertdatetime","media","table","help","wordcount","save"
+    ],
+   "toolbar": "undo redo | a11ycheck casechange blocks | bold italic backcolor | alignleft aligncenter alignright alignjustify | " +
+      "bullist numlist checklist outdent indent | removeformat | code table help | save"
+}
 
 	console.log('CLIENT', data.users)
 	const { form, errors, constraints, enhance } = superForm(data.form)
@@ -40,6 +50,7 @@
 
 	<Editor cssClass="bg-black"
 	apiKey={data.CMS}
+	conf={cmsConfig}
 	bind:value={cmsContent}
 
 />
