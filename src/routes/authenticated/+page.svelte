@@ -5,7 +5,7 @@
 
 	const { form, errors, constraints, enhance } = superForm(data.form)
 
-	console.log('Updated Username',data.user.username)
+	console.log('Updated Username', data.user.username)
 </script>
 
 <div class="card m-auto mt-16 max-w-md p-8">
