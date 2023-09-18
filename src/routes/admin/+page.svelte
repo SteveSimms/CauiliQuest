@@ -1,8 +1,13 @@
 <script lang="ts">
 		import { superForm } from 'sveltekit-superforms/client'
+		import { page } from '$app/stores'
+
+
 
 	export let data
+	$: users = data.users
 
+	console.log('CLIENT', data.users)
 	const { form, errors, constraints, enhance } = superForm(data.form)
 
 	console.log('Updated Username', data.user.username)
@@ -31,4 +36,9 @@
 <button class="btn variant-filled" type="submit">Save Username</button>
 </form>
 
+
+
+{#each data.users as users }
+		<li class="">{users.username}</li>
+{/each}
 </div>

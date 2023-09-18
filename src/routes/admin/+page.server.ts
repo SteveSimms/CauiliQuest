@@ -2,24 +2,26 @@ import { fail, redirect } from '@sveltejs/kit'
 import { superValidate, setError } from 'sveltekit-superforms/server'
 import { auth } from '$lib/server/auth'
 import { authSchema, adminSchema } from '$lib/zod/schema'
+import { Prisma } from '@prisma/client'
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export async function load({ locals }) {
-
 	const { user } = await locals.auth.validateUser()
 	const combinedSchema = authSchema.merge(adminSchema)
 	if (!user?.isAdmin) throw redirect(302, '/login')
-	// Check if user is an admin
-	// if (!user.isAdmin) {
-	// 	// Redirect non-admin users to another page or show an error
-	// 	throw redirect(302, '/')
-	// }
-	console.log('USER')
+
+	const users = await prisma.authUser.findMany({})
+	console.log('USERS', users)
 	console.log('ADMIN STATUS', user)
 
-	const form = await superValidate(user, combinedSchema )
+	const form = await superValidate(user, combinedSchema)
 
-	return { user, form }
+	return { user,users, form }
 }
+
 
 export const actions = {
 	async default({ request, locals }) {
