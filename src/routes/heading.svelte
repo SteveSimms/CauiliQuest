@@ -17,6 +17,7 @@
 	<svelte:fragment slot="trail">
 		<a href="/pricing">Pricing</a>
 		<a href="/authenticated">Authed</a>
+		<a href="/admin">Admin</a>
 
 		{#if user}
 			<form method="POST" action="/logout" use:enhance>

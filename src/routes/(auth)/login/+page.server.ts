@@ -16,6 +16,7 @@ export async function load({ locals }) {
 export const actions = {
 	async default({ request, locals }) {
 		const form = await superValidate(request, authSchema)
+		const { user } = await locals.auth.validateUser()
 
 		if (!form.valid) {
 			return fail(400, { form })
@@ -27,10 +28,11 @@ export const actions = {
 				form.data.username,
 				form.data.password
 			)
-			const session = await auth.createSession(key.userId)
+			const session = await auth.createSession(key.userId, user?.isAdmin || false)
 			locals.auth.setSession(session)
 		} catch (error) {
 			return setError(form, 'username', 'Invalid credentials')
 		}
 	},
+
 }
