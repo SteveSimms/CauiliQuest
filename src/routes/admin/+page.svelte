@@ -3,6 +3,10 @@
 		import { page } from '$app/stores'
 		import Editor from '@tinymce/tinymce-svelte';
 	// import { actions } from './+page.server.js'
+
+	import { getDrawerStore } from "@skeletonlabs/skeleton";
+
+const drawerStore = getDrawerStore();
 	
 
 
@@ -31,22 +35,21 @@
 	// console.log('Updated Username', data.user.username)
 
 
-	const saveContent = async  () => {
-		// const save = 'mcesave'
+
+	const onDrawerActionClicked = (isOpen = false) => {
+		if (isOpen) {
+			drawerStore.close();
+		} else {
+			drawerStore.open();
+		}
+	};
+
+
 	
-		// 	tinymce.activeEditor?.execCommand(save);
 
-// const response = await actions.saveContent( cmsContent )
-// if (response.ok) {
-//       // Handle success
-//       console.log('Content saved successfully');
-//     } else {
-//       // Handle error
-//       console.error('Failed to save content');
-//     }
 
- 	}
-	// console.log('actions',actions.saveContent)
+
+
 </script>
 
 <div class="card m-auto mt-16 max-w-md p-8">
@@ -87,7 +90,7 @@
 				<span class="flex-auto">
 				{users.username}
 				</span>
-				<span>⋮</span>
+				<span><button type="button" on:click={drawerStore.open}>⋮</button></span>
 
 
 			</li>
