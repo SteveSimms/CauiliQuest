@@ -8,6 +8,8 @@ import { PrismaClient } from '@prisma/client'
 
 import { TINYMCE_API_KEY as CMS } from '$env/static/private'
 
+export const prerender = false;
+
 const prisma = new PrismaClient()
 
 export async function load({ locals }) {

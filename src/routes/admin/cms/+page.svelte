@@ -2,8 +2,9 @@
 		import { superForm } from 'sveltekit-superforms/client'
 		import { page } from '$app/stores'
 		import Editor from '@tinymce/tinymce-svelte';
+		// import tinymce from 'tinymce/tinymce';
 	// import { actions } from './+page.server.js'
-	
+	export const prerender = false;
 
 
 
@@ -32,9 +33,9 @@
 
 
 	const saveContent = async  () => {
-		// const save = 'mcesave'
+	const save = 'mcesave'
 	
-		// 	tinymce.activeEditor?.execCommand(save);
+// activeEditor?.execCommand(save);
 
 // const response = await actions.saveContent( cmsContent )
 // if (response.ok) {
@@ -50,7 +51,7 @@
 </script>
 
 <div class="card m-auto mt-16 max-w-md p-8">
-	<h1>Admin</h1>
+	<h1>Admin CMS</h1>
 	<p class="mt-4 capitalize">Welcome, {data.user.username}!</p>
 <form method="POST" class="mt-8 space-y-8"  use:enhance>
 	<label class="label" for="username">
@@ -68,39 +69,29 @@
 
 	</label>
 
+	<Editor cssClass="bg-black"
+	apiKey={data.CMS}
+	conf={cmsConfig}
+	bind:value={cmsContent}
+	on:input={(event) => cmsContent = event.detail}
 
+/>
+<button class="btn variant-filled" on:click={saveContent}>Save Content</button>
 
 <button class="btn variant-filled" type="submit">Save Username</button>
-
-
-
-
 </form>
 
 
-<div class="w-full text-token card p-4 space-y-4 mt-5">
-{#each data.users as users, i }
 
-		<ol class="list">
-			<li>
-				<span class="badge-icon p-4 variant-soft-primary">{i + 1}</span>
-				<span class="flex-auto">
-				{users.username}
-				</span>
-				<span>⋮</span>
-
-
-			</li>
-
-		</ol>
+{#each data.users as users }
+		<li class="">{users.username}</li>
 {/each}
-
-</div>
 
 
 {@html cmsContent}
-<a class="mt-2" href="/admin/cms">CMS</a>
+
 </div>
+
 
 
 <!-- todo[] add an "async-data-table" that has client-side pagination and server-side pagination actions https://www.skeleton.dev/elements/lists -->
