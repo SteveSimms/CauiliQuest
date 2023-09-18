@@ -2,8 +2,9 @@
 		import { superForm } from 'sveltekit-superforms/client'
 		import { page } from '$app/stores'
 		import Editor from '@tinymce/tinymce-svelte';
+		// import tinymce from 'tinymce/tinymce';
 	// import { actions } from './+page.server.js'
-	
+	export const prerender = false;
 
 
 
@@ -32,9 +33,9 @@
 
 
 	const saveContent = async  () => {
-		// const save = 'mcesave'
+	const save = 'mcesave'
 	
-		// 	tinymce.activeEditor?.execCommand(save);
+// activeEditor?.execCommand(save);
 
 // const response = await actions.saveContent( cmsContent )
 // if (response.ok) {
@@ -50,7 +51,7 @@
 </script>
 
 <div class="card m-auto mt-16 max-w-md p-8">
-	<h1>Admin</h1>
+	<h1>Admin CMS</h1>
 	<p class="mt-4 capitalize">Welcome, {data.user.username}!</p>
 <form method="POST" class="mt-8 space-y-8"  use:enhance>
 	<label class="label" for="username">
@@ -68,7 +69,14 @@
 
 	</label>
 
+	<Editor cssClass="bg-black"
+	apiKey={data.CMS}
+	conf={cmsConfig}
+	bind:value={cmsContent}
+	on:input={(event) => cmsContent = event.detail}
 
+/>
+<button class="btn variant-filled" on:click={saveContent}>Save Content</button>
 
 <button class="btn variant-filled" type="submit">Save Username</button>
 </form>
@@ -81,14 +89,15 @@
 
 
 {@html cmsContent}
-<a href="/admin/cms">CMS</a>
+
 </div>
+
 
 
 <!-- todo[] add an "async-data-table" that has client-side pagination and server-side pagination actions https://www.skeleton.dev/elements/lists -->
 <!-- todo[] add drawer triggered by listAction https://www.skeleton.dev/utilities/drawers -->
 <!-- todo[] add image upload and crud to support admin/profile edit fx to authUser and authSchema https://www.skeleton.dev/components/file-buttons-->
 
-<!-- todo[] add wysywig editor to support admin/profile edit fx to authUser and authSchema https://www.tiny.cloud/my-account/dashboard/ its literally a svelte component self hosted: https://www.tiny.cloud/docs/tinymce/6/bundle-spelling-container/#procedure -->
+<!-- todo[in progress] add wysywig editor to support admin/profile edit fx to authUser and authSchema https://www.tiny.cloud/my-account/dashboard/ its literally a svelte component self hosted: https://www.tiny.cloud/docs/tinymce/6/bundle-spelling-container/#procedure -->
 
 <!-- todo[] maybe add chat to the admin page? https://www.skeleton.dev/elements/chat -->

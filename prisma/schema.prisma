@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -13,10 +13,18 @@ model AuthUser {
   isAdmin      Boolean       @default(false)
   auth_key     AuthKey[]
   auth_session AuthSession[]
+  content      Content[]     // Add a new field for the content relationship
 
   @@map("auth_users")
 }
 
+model Content {
+  id          String   @id @unique
+  title       String
+  description String?
+  author_id   String   // Add a foreign key to reference the AuthUser model
+  author      AuthUser @relation(fields: [author_id], references: [id])
+}
 model AuthSession {
   id             String   @id @unique
   user_id        String
