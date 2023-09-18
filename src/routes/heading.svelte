@@ -5,6 +5,7 @@
 	import { Flame } from 'lucide-svelte'
 
 	$: user = $page.data.user
+	console.log('CLIENT', user)
 </script>
 
 <AppBar>
@@ -17,7 +18,12 @@
 	<svelte:fragment slot="trail">
 		<a href="/pricing">Pricing</a>
 		<a href="/authenticated">Authed</a>
+
+		{#if user && user.isAdmin }
 		<a href="/admin">Admin</a>
+		{:else}
+			{''}
+		{/if}
 
 		{#if user}
 			<form method="POST" action="/logout" use:enhance>
