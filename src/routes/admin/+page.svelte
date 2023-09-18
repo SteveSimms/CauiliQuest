@@ -42,3 +42,12 @@
 		<li class="">{users.username}</li>
 {/each}
 </div>
+
+
+<!-- todo[] add an "async-data-table" that has client-side pagination and server-side pagination actions https://www.skeleton.dev/elements/lists -->
+<!-- todo[] add drawer triggered by listAction https://www.skeleton.dev/utilities/drawers -->
+<!-- todo[] add image upload and crud to support admin/profile edit fx to authUser and authSchema https://www.skeleton.dev/components/file-buttons-->
+
+<!-- todo[] add wysywig editor to support admin/profile edit fx to authUser and authSchema https://www.tiny.cloud/my-account/dashboard/ its literally a svelte component self hosted: https://www.tiny.cloud/docs/tinymce/6/bundle-spelling-container/#procedure -->
+
+<!-- todo[] maybe add chat to the admin page? https://www.skeleton.dev/elements/chat -->
