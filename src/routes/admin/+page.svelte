@@ -1,11 +1,17 @@
 <script lang="ts">
 		import { superForm } from 'sveltekit-superforms/client'
 		import { page } from '$app/stores'
+		import Editor from '@tinymce/tinymce-svelte';
+
+
 
 
 
 	export let data
 	$: users = data.users
+
+
+	$: cmsContent = ''
 
 	console.log('CLIENT', data.users)
 	const { form, errors, constraints, enhance } = superForm(data.form)
@@ -32,6 +38,12 @@
 
 	</label>
 
+	<Editor cssClass="bg-black"
+	apiKey={data.CMS}
+	bind:value={cmsContent}
+
+/>
+
 
 <button class="btn variant-filled" type="submit">Save Username</button>
 </form>
@@ -41,6 +53,9 @@
 {#each data.users as users }
 		<li class="">{users.username}</li>
 {/each}
+
+
+{@html cmsContent}
 </div>
 
 

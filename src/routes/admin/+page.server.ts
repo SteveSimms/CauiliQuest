@@ -6,6 +6,8 @@ import { Prisma } from '@prisma/client'
 
 import { PrismaClient } from '@prisma/client'
 
+import { TINYMCE_API_KEY as CMS } from '$env/static/private'
+
 const prisma = new PrismaClient()
 
 export async function load({ locals }) {
@@ -19,7 +21,7 @@ export async function load({ locals }) {
 
 	const form = await superValidate(user, combinedSchema)
 
-	return { user,users, form }
+	return { user,users, form, CMS }
 }
 
 
