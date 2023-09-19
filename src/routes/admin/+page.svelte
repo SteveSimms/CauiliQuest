@@ -4,7 +4,7 @@
 		import Editor from '@tinymce/tinymce-svelte';
 	// import { actions } from './+page.server.js'
 
-	import { getDrawerStore } from "@skeletonlabs/skeleton";
+	import { getDrawerStore, type DrawerSettings } from "@skeletonlabs/skeleton";
 
 const drawerStore = getDrawerStore();
 	
@@ -35,14 +35,39 @@ const drawerStore = getDrawerStore();
 	// console.log('Updated Username', data.user.username)
 
 
-
-	const onDrawerActionClicked = (isOpen = false) => {
+let isOpen = false
+	const onDrawerActionClicked = () => {
+		const settings: DrawerSettings = { id: 'edit user' };
 		if (isOpen) {
 			drawerStore.close();
 		} else {
-			drawerStore.open();
+			drawerStore.open(settings);
 		}
 	};
+
+
+
+
+	function triggerStyled(): void {
+		const drawerSettings: DrawerSettings = {
+			id: 'data',
+			// Property Overrides
+			position: 'right',
+			// bgDrawer: 'bg-purple-900 text-white',
+			// bgBackdrop: 'bg-gradient-to-tr from-indigo-500/50 via-purple-500/50 to-pink-500/50',
+			width: 'w-[280px] md:w-[480px]',
+			padding: 'p-4',
+			rounded: 'rounded-xl',
+			// Metadata
+			meta: 'Styled Drawer'
+		};
+		drawerStore.open(drawerSettings);
+		// drawerStore.open();
+	}
+
+
+
+// drawerStore.open(settings);
 
 
 	
@@ -53,7 +78,7 @@ const drawerStore = getDrawerStore();
 </script>
 
 <div class="card m-auto mt-16 max-w-md p-8">
-	<h1>Admin</h1>
+	<h1 class="text-6xl bold">Admin</h1>
 	<p class="mt-4 capitalize">Welcome, {data.user.username}!</p>
 <form method="POST" class="mt-8 space-y-8"  use:enhance>
 	<label class="label" for="username">
@@ -90,7 +115,9 @@ const drawerStore = getDrawerStore();
 				<span class="flex-auto">
 				{users.username}
 				</span>
-				<span><button type="button" on:click={drawerStore.open}>⋮</button></span>
+				<span><button type="button" on:click={triggerStyled}>⋮</button></span>
+
+				<!-- <button class="col-span-2 btn variant-filled" on:click={triggerStyled}>Styled Drawer</button> -->
 
 
 			</li>
@@ -100,10 +127,14 @@ const drawerStore = getDrawerStore();
 
 </div>
 
+<!-- <div>{$drawerStore.meta}</div> -->
 
-{@html cmsContent}
-<a class="mt-2" href="/admin/cms">CMS</a>
+
+<a class="mt-2 text-primary-500" href="/admin/cms">CMS</a>
 </div>
+
+
+
 
 
 <!-- todo[] add an "async-data-table" that has client-side pagination and server-side pagination actions https://www.skeleton.dev/elements/lists -->

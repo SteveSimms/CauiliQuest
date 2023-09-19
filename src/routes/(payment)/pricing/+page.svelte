@@ -4,7 +4,7 @@
 </script>
 
 <section class="card m-auto mt-16 max-w-sm p-8">
-	<h2>Enterprise</h2>
+	<h2 class="text-6xl bold">Enterprise</h2>
 	<p class="description mt-8 text-gray-400">A plan that scales with you.</p>
 
 	<div class="mt-8">

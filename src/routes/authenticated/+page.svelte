@@ -9,7 +9,7 @@
 </script>
 
 <div class="card m-auto mt-16 max-w-md p-8">
-	<h1>Profile</h1>
+	<h1 class="text-6xl bold">Profile</h1>
 	<p class="mt-4 capitalize">Welcome, {data.user.username}!</p>
 <form method="POST" class="mt-8 space-y-8"  use:enhance>
 	<label class="label" for="username">
